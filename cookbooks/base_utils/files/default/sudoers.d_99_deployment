@@ -1,0 +1,1 @@
+deployment ALL=(ALL) NOPASSWD:ALL
