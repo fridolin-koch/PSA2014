@@ -93,6 +93,18 @@ if node['platform'] == 'debian'
     action :restart
   end
 
+  #ntp 
+  cookbook_file "/etc/ntp.conf" do
+    source "ntp.conf"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
+  service "ntp" do
+    action :restart
+  end
+
   #bashrc
   cookbook_file "/root/.bashrc" do
     source "bashrc"
