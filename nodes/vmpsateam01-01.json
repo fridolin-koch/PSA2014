@@ -1,0 +1,12 @@
+{
+  "name": "vmpsateam01-01.vmpsateam01-01",
+  "chef_environment": "_default",
+  "normal": {
+    "tags": [
+
+    ]
+  },
+  "run_list": [
+    "recipe[base_utils]"
+  ]
+}

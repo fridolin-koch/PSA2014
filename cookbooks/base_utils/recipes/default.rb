@@ -5,7 +5,8 @@
 # Copyright 2014, Fridolin Koch
 #
 # MIT
-#
+
+#we only support debian at this time
 if node['platform'] == 'debian'
 
   #debian sources
@@ -23,63 +24,63 @@ if node['platform'] == 'debian'
   
   #install utils
   #git
-  apt_package "git" do
+  package "git" do
     action :install
   end
   #svn
-  apt_package "subversion" do
+  package "subversion" do
     action :install
   end
   #htop
-  apt_package "htop" do
+  package "htop" do
     action :install
   end
   #ruby
-  apt_package "ruby" do
+  package "ruby" do
     action :install
   end
   #vim
-  apt_package "vim" do
+  package "vim" do
     action :install
   end
   #curl
-  apt_package "curl" do
+  package "curl" do
     action :install
   end
   #sudo
-  apt_package "sudo" do
+  package "sudo" do
     action :install
   end
   #telnet
-  apt_package "telnet" do
+  package "telnet" do
     action :install
   end
   #supervisor
-  apt_package "supervisor" do
+  package "supervisor" do
     action :install
   end
   #xterm
-  apt_package "xterm" do
+  package "xterm" do
     action :install
   end
   #screen
-  apt_package "screen" do
+  package "screen" do
     action :install
   end
   #ntp
-  apt_package "ntp" do
+  package "ntp" do
     action :install
   end
   
-
-  #ssh server config
+  #ssh server banner
   template "/etc/motd" do
     source "sshd_banner.erb"
     mode 0644
     owner "root"
     group "root"
   end
-
+  
+  #ssh server configuration
   cookbook_file "/etc/ssh/sshd_config" do
     source "sshd_config"
     mode 0644
@@ -88,7 +89,7 @@ if node['platform'] == 'debian'
   end
 
   #restart ssh
-    service "ssh" do
+  service "ssh" do
     action :restart
   end
 
@@ -106,6 +107,57 @@ if node['platform'] == 'debian'
     mode 0644
     owner "root"
     group "root"
-  end 
+  end
+  
+  #create ssh directory
+  directory "/root/.ssh" do
+    owner "root"
+    group "root"
+    mode 0700
+    action :create
+  end
+  
+  cookbook_file "/root/.ssh/authorized_keys" do
+    source "root_authorized_keys"
+    mode 0600
+    owner "root"
+    group "root"
+  end
+  
+  #create users and groups
+  group "psateam" do
+    gid 1005
+    action :create
+  end
+  
+  #get psa team members
+  psateam = data_bag_item('users', 'psateam')
+  
+  if psateam["users"]
+    
+    psateam["users"].each do |user|
+    
+      #only set the password once
+      setPassword = !node["etc"]["passwd"].has_key?(user["name"])
+      
+      #create user
+      user user["name"] do
+        supports :manage_home => true
+        uid user["id"]
+        gid 1005
+        home "/home/#{user['name']}"
+        shell "/bin/bash"
+      end
+      
+      if setPassword
+        #change password and force the user to change it
+        execute "Setting password for user #{user['name']}" do
+            command "echo #{user['name']}:psa2014 | chpasswd && chage -d 0 #{user['name']}"
+            action :run
+        end
+      end
+      
+    end
+  end
   
 end
