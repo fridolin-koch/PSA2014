@@ -60,10 +60,6 @@ if node['platform'] == 'debian'
   package "telnet" do
     action :install
   end
-  #supervisor
-  package "supervisor" do
-    action :install
-  end
   #xterm
   package "xterm" do
     action :install
