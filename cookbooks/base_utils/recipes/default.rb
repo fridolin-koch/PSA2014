@@ -17,6 +17,11 @@ if node['platform'] == 'debian'
     group "root"
   end
   
+  execute "Adding dotdeb GPG-Key" do
+    command "curl -s http://www.dotdeb.org/dotdeb.gpg | apt-key add -"
+    action :run
+  end
+  
   execute "update apt sources" do
     command "aptitude update"
     action :run
