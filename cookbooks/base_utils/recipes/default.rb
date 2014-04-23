@@ -18,7 +18,7 @@ if node['platform'] == 'debian'
   end
   
   execute "Adding dotdeb GPG-Key" do
-    command "curl -s http://www.dotdeb.org/dotdeb.gpg | apt-key add -"
+    command "cd /root && wget http://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg"
     action :run
   end
   
