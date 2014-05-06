@@ -4,7 +4,15 @@
   "normal": {
     "tags": [
 
-    ]
+    ],
+    "networking": {
+      "eth1": {
+        "address": "192.168.1.1",
+        "gateway": "192.168.21.2"
+      },
+      "gateway": true
+    }
+    
   },
   "run_list": [
     "recipe[base_utils]"

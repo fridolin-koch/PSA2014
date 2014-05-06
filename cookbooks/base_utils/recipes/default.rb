@@ -173,4 +173,18 @@ if node['platform'] == 'debian'
     end
   end
   
+  #networking configuration
+  template "/etc/network/interfaces" do
+    source "network_interfaces.erb"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
+  execute "Restart network" do
+    command "invoke-rc.d networking stop; sleep 2; invoke-rc.d networking start"
+    action :run
+  end
+
+  
 end

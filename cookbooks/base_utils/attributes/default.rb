@@ -6,3 +6,16 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+#networking stuff
+default['networking']['eth1']['address'] = nil
+default['networking']['eth1']['gateway'] = '192.168.1.1'
+default['networking']['eth1']['netmask'] = '255.255.255.0'
+
+#gatway stuff
+default['networking']['gateway'] = false
+
+default['networking']['eth1:0']['address'] = '192.168.21.1'
+default['networking']['eth1:0']['netmask'] = '255.255.255.0'
+
+default['networking']['eth1:1']['address'] = '192.168.81.1'
+default['networking']['eth1:1']['netmask'] = '255.255.255.0'
