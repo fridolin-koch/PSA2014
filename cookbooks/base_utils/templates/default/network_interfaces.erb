@@ -15,6 +15,8 @@ allow-hotplug eth1
 iface eth1 inet static
     address <%= node['networking']['eth1']['address'] %>
     netmask <%= node['networking']['eth1']['netmask'] %>
+    up route add -net 192.168.0.0 netmask 255.255.0.0 gw <%= node['networking']['eth1']['gateway'] %>
+    down route del -net 192.168.0.0 netmask 255.255.0.0 gw <%= node['networking']['eth1']['gateway'] %>
 <% end %>
 
 <% if node['networking']['gateway'] %>
@@ -23,6 +25,8 @@ allow-hotplug eth1:0
 iface eth1:0 inet static
     address <%= node['networking']['eth1:0']['address'] %>
     netmask <%= node['networking']['eth1:0']['netmask'] %>
+    up route add -net 192.168.0.0 netmask 255.255.0.0 gw <%= node['networking']['eth1']['gateway'] %>
+    down route del -net 192.168.0.0 netmask 255.255.0.0 gw <%= node['networking']['eth1']['gateway'] %>
     
 auto eth1:1
 allow-hotplug eth1:1
@@ -32,10 +36,10 @@ iface eth1:1 inet static
 <% end %>
 
 #routes
-<% if node['networking']['gateway'] %>
-up ip route replace 192.168.0.0/16 via 192.168.21.2 dev eth1:0
-down route del 192.168.0.0/16 via 192.168.21.2 dev eth1:0
-<% else %>
-up ip route replace 192.168.0.0/16 via <%= node['networking']['eth1']['gateway'] %> dev eth1
-down ip route del 192.168.0.0/16 via <%= node['networking']['eth1']['gateway'] %> dev eth1
-<% end %>
+#<% if node['networking']['gateway'] %>
+#up ip route replace 192.168.0.0/16 via 192.168.21.2 dev eth1:0
+#down route del 192.168.0.0/16 via 192.168.21.2 dev eth1:0
+#<% else %>
+#up ip route replace 192.168.0.0/16 via <%= node['networking']['eth1']['gateway'] %> dev eth1
+#down ip route del 192.168.0.0/16 via <%= node['networking']['eth1']['gateway'] %> dev eth1
+#<% end %>
