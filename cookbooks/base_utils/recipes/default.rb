@@ -72,6 +72,11 @@ if node['platform'] == 'debian'
   package "ntp" do
     action :install
   end
+  #dig
+  package "dnsutils" do
+    action :install
+  end
+  
   
   #ssh server banner
   template "/etc/motd" do
