@@ -1,0 +1,42 @@
+*filter
+
+#defaults for all chains
+-P INPUT DROP
+-P FORWARD DROP
+-P OUTPUT DROP
+
+# Allows all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0
+-A INPUT -i lo -j ACCEPT
+-A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT
+
+# Allows SSH, HTTP and HTTPS connections from anywhere
+-A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -o eth0 -p tcp -m multiport --sports 22,80,443 -m state --state ESTABLISHED -j ACCEPT
+
+#Allow bidirectional icmp
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+-A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
+
+-A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+-A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
+
+-A FORWARD -p icmp -j ACCEPT
+
+#outbound connections
+
+#tum network
+-A OUTPUT -s 131.159.0.0/16 -j ACCEPT
+#psa network
+-A OUTPUT -s 192.168.0.0/16 -j ACCEPT
+#aptitude servers
+#security.debian.org
+-A OUTPUT -s 212.211.132.250 -j ACCEPT
+-A OUTPUT -s 195.20.242.89 -j ACCEPT
+-A OUTPUT -s 212.211.132.32 -j ACCEPT
+#it's a cdn so we use the hostname
+-A OUTPUT -p tcp --src cdn.debian.net -j ACCEPT
+#dotdeb archives
+-A OUTPUT -s 88.190.17.153 -j ACCEPT
+
+
+COMMIT
