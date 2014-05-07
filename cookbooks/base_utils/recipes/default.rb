@@ -178,6 +178,41 @@ if node['platform'] == 'debian'
     end
   end
   
+  #-----------
+  # Networking
+  #-----------
+  
+  if node['networking']['gateway']
+  
+    cookbook_file "/etc/firewall.rules" do
+      source "firewall.rules"
+      mode 0644
+      owner "root"
+      group "root"
+    end
+
+    #restore firewall rules from file
+    execute "Restoring firewall rules" do
+      command "/sbin/iptables-restore < /etc/firewall.rules"
+      action :run
+    end
+
+    #creating iptables master file
+    execute "Creating iptables master file" do
+      command "/sbin/iptables-save > /etc/iptables.up.rules"
+      action :run
+    end
+
+    #network pre-up hook
+    cookbook_file "/etc/network/if-pre-up.d/iptables" do
+      source "if-pre-up.d_iptables"
+      mode 0700
+      owner "root"
+      group "root"
+    end
+  
+  end
+  
   #networking configuration
   template "/etc/network/interfaces" do
     source "network_interfaces.erb"
@@ -190,6 +225,13 @@ if node['platform'] == 'debian'
     command "invoke-rc.d networking stop; sleep 2; invoke-rc.d networking start"
     action :run
   end
-
+  
+  #proxy
+  cookbook_file "/etc/environment" do
+   source "/etc_environment"
+   mode 0644
+   owner "root"
+   group "root"
+  end
   
 end
