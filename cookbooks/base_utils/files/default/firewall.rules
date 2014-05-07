@@ -13,16 +13,16 @@
 -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A OUTPUT -o eth0 -p tcp -m multiport --sports 22,80,443 -m state --state ESTABLISHED -j ACCEPT
 
-#Allow bidirectional icmp
--A INPUT -p icmp --icmp-type echo-request -j ACCEPT
--A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
-
--A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
--A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
-
+#Allow  icmp
+-A INPUT -p icmp -j ACCEPT
+-A OUTPUT -p icmp -j ACCEPT
 -A FORWARD -p icmp -j ACCEPT
 
 #outbound connections
+
+#dns
+-A OUTPUT -p udp -o eth0 --dport 53 -j ACCEPT
+-A INPUT -p udp -i eth0 --sport 53 -j ACCEPT
 
 #tum network
 -A OUTPUT -s 131.159.0.0/16 -j ACCEPT
@@ -38,6 +38,4 @@
 #dotdeb archives
 -A OUTPUT -s 88.190.17.153 -j ACCEPT
 
-
 COMMIT
-
