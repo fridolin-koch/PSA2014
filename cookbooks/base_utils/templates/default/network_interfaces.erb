@@ -34,12 +34,3 @@ iface eth1:1 inet static
     address <%= node['networking']['eth1:1']['address'] %>
     netmask <%= node['networking']['eth1:1']['netmask'] %>
 <% end %>
-
-#routes
-#<% if node['networking']['gateway'] %>
-#up ip route replace 192.168.0.0/16 via 192.168.21.2 dev eth1:0
-#down route del 192.168.0.0/16 via 192.168.21.2 dev eth1:0
-#<% else %>
-#up ip route replace 192.168.0.0/16 via <%= node['networking']['eth1']['gateway'] %> dev eth1
-#down ip route del 192.168.0.0/16 via <%= node['networking']['eth1']['gateway'] %> dev eth1
-#<% end %>
