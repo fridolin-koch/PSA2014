@@ -1,3 +1,7 @@
+*nat
+
+-A POSTROUTING --out-interface eth0 -j MASQUERADE
+
 *filter
 
 #defaults for all chains
@@ -9,33 +13,41 @@
 -A INPUT -i lo -j ACCEPT
 -A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT
 
-# Allows SSH, HTTP and HTTPS connections from anywhere
--A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT
--A OUTPUT -o eth0 -p tcp -m multiport --sports 22,80,443 -m state --state ESTABLISHED -j ACCEPT
+# Allows incoming and outgoing SSH, HTTP and HTTPS connections from anywhere
+-A INPUT -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp -m multiport --sports 22,80,443 -m state --state ESTABLISHED -j ACCEPT
+
+#forwards on eth1
+-A FORWARD -i eth1 -j ACCEPT
 
 #Allow  icmp
 -A INPUT -p icmp -j ACCEPT
 -A OUTPUT -p icmp -j ACCEPT
--A FORWARD -p icmp -j ACCEPT
+
+#dns
+-A OUTPUT -p udp --dport 53 -j ACCEPT
+-A INPUT -p udp --sport 53 -j ACCEPT
+
+#proxy
+-A INPUT -p tcp --sport 8080 -j ACCEPT
+
+#chef
+-A INPUT -p tcp --sport 60183 -j ACCEPT
 
 #outbound connections
 
-#dns
--A OUTPUT -p udp -o eth0 --dport 53 -j ACCEPT
--A INPUT -p udp -i eth0 --sport 53 -j ACCEPT
+#tum and psa network
+-A OUTPUT -d 131.159.0.0/16 -j ACCEPT
+-A OUTPUT -d 192.168.0.0/16 -j ACCEPT
 
-#tum network
--A OUTPUT -s 131.159.0.0/16 -j ACCEPT
-#psa network
--A OUTPUT -s 192.168.0.0/16 -j ACCEPT
 #aptitude servers
 #security.debian.org
--A OUTPUT -s 212.211.132.250 -j ACCEPT
--A OUTPUT -s 195.20.242.89 -j ACCEPT
--A OUTPUT -s 212.211.132.32 -j ACCEPT
+-A OUTPUT -d 212.211.132.250 -j ACCEPT
+-A OUTPUT -d 195.20.242.89 -j ACCEPT
+-A OUTPUT -d 212.211.132.32 -j ACCEPT
 #it's a cdn so we use the hostname
--A OUTPUT -p tcp --src cdn.debian.net -j ACCEPT
+-A OUTPUT -p tcp --dest cdn.debian.net -j ACCEPT
 #dotdeb archives
--A OUTPUT -s 88.190.17.153 -j ACCEPT
+-A OUTPUT -d 88.190.17.153 -j ACCEPT
 
 COMMIT

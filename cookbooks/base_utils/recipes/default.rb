@@ -228,7 +228,14 @@ if node['platform'] == 'debian'
   
   #proxy
   cookbook_file "/etc/environment" do
-   source "/etc_environment"
+   source "etc_environment"
+   mode 0644
+   owner "root"
+   group "root"
+  end
+  
+  cookbook_file "/etc/apt/apt.conf.d/70debconf" do
+   source "70debconf"
    mode 0644
    owner "root"
    group "root"
