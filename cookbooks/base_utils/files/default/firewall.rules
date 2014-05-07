@@ -2,6 +2,8 @@
 
 -A POSTROUTING --out-interface eth0 -j MASQUERADE
 
+COMMIT
+
 *filter
 
 #defaults for all chains

@@ -210,6 +210,21 @@ if node['platform'] == 'debian'
       owner "root"
       group "root"
     end
+    
+    #proxy
+    cookbook_file "/etc/environment" do
+     source "etc_environment"
+     mode 0644
+     owner "root"
+     group "root"
+    end
+  
+    cookbook_file "/etc/apt/apt.conf.d/70debconf" do
+     source "70debconf"
+     mode 0644
+     owner "root"
+     group "root"
+    end
   
   end
   
@@ -224,21 +239,6 @@ if node['platform'] == 'debian'
   execute "Restart network" do
     command "invoke-rc.d networking stop; sleep 2; invoke-rc.d networking start"
     action :run
-  end
-  
-  #proxy
-  cookbook_file "/etc/environment" do
-   source "etc_environment"
-   mode 0644
-   owner "root"
-   group "root"
-  end
-  
-  cookbook_file "/etc/apt/apt.conf.d/70debconf" do
-   source "70debconf"
-   mode 0644
-   owner "root"
-   group "root"
   end
   
 end
