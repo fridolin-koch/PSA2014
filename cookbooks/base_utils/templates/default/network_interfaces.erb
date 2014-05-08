@@ -5,9 +5,10 @@
 auto lo
 iface lo inet loopback
 
-# The primary network interface
+<% if node['networking']['gateway'] %>
 auto eth0
 iface eth0 inet dhcp
+<% end %>
 
 <% if !node['networking']['eth1']['address'].nil? %>
 auto eth1
