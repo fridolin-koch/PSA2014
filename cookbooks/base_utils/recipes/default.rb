@@ -210,14 +210,6 @@ if node['platform'] == 'debian'
       owner "root"
       group "root"
     end
-    
-    #proxy
-    cookbook_file "/etc/environment" do
-     source "etc_environment"
-     mode 0644
-     owner "root"
-     group "root"
-    end
   
     cookbook_file "/etc/apt/apt.conf.d/70debconf" do
      source "70debconf"
@@ -228,9 +220,17 @@ if node['platform'] == 'debian'
   
   end
   
+  #proxy
+  cookbook_file "/etc/environment" do
+   source "etc_environment"
+   mode 0644
+   owner "root"
+   group "root"
+  end
+  
   #sysctl conf
   template "/etc/sysctl.conf" do
-     source "etc_systctl.erb"
+     source "etc_sysctl.erb"
      mode 0644
      owner "root"
      group "root"
