@@ -1,0 +1,18 @@
+;
+; BIND reverse data file for psa-team1.informatik.tu-muenchen.de
+;
+$TTL	3600
+@	IN	SOA	ns.psa-team1.informatik.tu-muenchen.de. zonemaster.psa-team1.informatik.tu-muenchen.de. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+
+                     IN NS      ns.
+1                    IN PTR     node1.psa-team1.informatik.tu-muenchen.de.
+2                    IN PTR     node2.psa-team1.informatik.tu-muenchen.de.
+3                    IN PTR     node3.psa-team1.informatik.tu-muenchen.de.
+4                    IN PTR     node4.psa-team1.informatik.tu-muenchen.de.
+
