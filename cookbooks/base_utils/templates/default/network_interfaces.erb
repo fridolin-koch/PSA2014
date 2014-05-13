@@ -17,6 +17,7 @@ iface eth1 inet static
     address <%= node['networking']['eth1']['address'] %>
     netmask <%= node['networking']['eth1']['netmask'] %>
     gateway <%= node['networking']['eth1']['gateway'] %>
+    dns-nameservers 131.159.254.1 131.159.254.2
 <% end %>
 
 <% if node['networking']['gateway'] %>
