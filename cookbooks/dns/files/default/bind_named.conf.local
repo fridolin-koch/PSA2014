@@ -1,0 +1,9 @@
+zone  "psa-team1.informatik.tu-muenchen.de"   {
+    type master;
+    file    "/etc/bind/zones/for.psa-team1.informatik.tu-muenchen.de";
+};
+
+zone  "1.168.192.in-addr.arpa"        {
+    type master;
+    file    "/etc/bind/zones/rev.psa-team1.informatik.tu-muenchen.de";
+};
