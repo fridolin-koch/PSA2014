@@ -16,8 +16,7 @@ allow-hotplug eth1
 iface eth1 inet static
     address <%= node['networking']['eth1']['address'] %>
     netmask <%= node['networking']['eth1']['netmask'] %>
-    up route add default netmask 255.255.0.0 gw <%= node['networking']['eth1']['gateway'] %>
-    down route del default netmask 255.255.0.0 gw <%= node['networking']['eth1']['gateway'] %>
+    gateway <%= node['networking']['eth1']['gateway'] %>
 <% end %>
 
 <% if node['networking']['gateway'] %>
