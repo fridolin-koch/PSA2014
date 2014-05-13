@@ -27,9 +27,7 @@
 # Uncomment the next line to enable packet forwarding for IPv4
 <% if node['networking']['gateway'] %>
 net.ipv4.ip_forward=1
-<% end %>
-
-<% !if node['networking']['gateway'] %>
+<% else %>
 net.ipv4.ip_forward=0
 <% end %>
 
