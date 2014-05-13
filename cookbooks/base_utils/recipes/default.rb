@@ -228,6 +228,14 @@ if node['platform'] == 'debian'
   
   end
   
+  #sysctl conf
+  template "/etc/sysctl.conf" do
+     source "etc_systctl.erb"
+     mode 0644
+     owner "root"
+     group "root"
+  end
+
   #networking configuration
   template "/etc/network/interfaces" do
     source "network_interfaces.erb"

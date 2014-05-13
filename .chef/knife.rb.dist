@@ -1,9 +1,0 @@
-log_level                :info
-log_location             STDOUT
-node_name                '<Your-Username>'
-client_key               '<Path-To-Private-Key>'
-validation_client_name   'chef-validator'
-validation_key           '<Path-To-Private-Validation-Key>'
-chef_server_url          'https://psa.in.tum.de:60183'
-syntax_check_cache_path  '<Path-To-Syntax-Cache>'
-cookbook_path		 '<Path-To-Chef-Repository>/cookbooks'
