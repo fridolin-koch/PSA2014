@@ -64,6 +64,6 @@ COMMIT
 *raw
 
 -A PREROUTING -p tcp -m multiport --dports 80,443 -j NOTRACK
--A OUTPUT -j -p tcp -m multiport --sports 80,443 -j NOTRACK
+-A OUTPUT -p tcp -m multiport --sports 80,443 -j NOTRACK
 
 COMMIT
