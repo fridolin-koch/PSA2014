@@ -20,7 +20,19 @@ options {
   // you will need to update your keys.  See https://www.isc.org/bind-keys
   //========================================================================
   # dnssec-validation auto;
-
+  
+  #transfer
+  allow-transfer  {
+    192.168.2.3;
+    192.168.8.5;
+  };
+  notify yes;
+  
+  allow-notify {
+    192.168.2.3;
+    192.168.8.5;
+  };
+  
   auth-nxdomain no;    # conform to RFC1035
   listen-on-v6 { any; };
 };

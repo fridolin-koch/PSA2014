@@ -6,5 +6,43 @@ zone  "psa-team1.informatik.tu-muenchen.de"   {
 #reverse zone
 zone  "1.168.192.in-addr.arpa"        {
     type master;
-    file    "/etc/bind/zones/db.192.168.1";
+    file    "/etc/bind/zones/db.1.168.192";
+};
+
+#team2
+
+#forward zone
+zone  "psa-team2.informatik.tu-muenchen.de"   {
+    type slave;
+    masters {
+      192.168.2.3; 
+    };
+    file    "back/psa-team2.informatik.tu-muenchen.de.bak";
+};
+#reverse zone
+zone  "2.168.192.in-addr.arpa"        {
+    type slave;
+    masters {
+      192.168.2.3; 
+    };
+    file    "back/2.168.192.bak";
+};
+
+#team8
+
+#forward zone
+zone  "psa-team8.informatik.tu-muenchen.de"   {
+    type slave;
+    masters {
+      192.168.8.5; 
+    };
+    file    "back/psa-team8.informatik.tu-muenchen.de.bak";
+};
+#reverse zone
+zone  "8.168.192.in-addr.arpa"        {
+    type slave;
+    masters {
+      192.168.8.5; 
+    };
+    file    "back/8.168.192.bak";
 };

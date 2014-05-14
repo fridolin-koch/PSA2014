@@ -41,6 +41,15 @@ if node['platform'] == 'debian'
     action :create
   end
   
+  directory "/var/cache/bind/back" do
+    owner "bind"
+    group "bind"
+    mode 0755
+    action :create
+  end
+  
+  
+  
   #our zones
   
   cookbook_file "/etc/bind/zones/db.psa-team1.informatik.tu-muenchen.de" do
@@ -50,8 +59,8 @@ if node['platform'] == 'debian'
    group "root"
   end
   
-  cookbook_file "/etc/bind/zones/db.192.168.1" do
-   source "bind_zones_db.192.168.1"
+  cookbook_file "/etc/bind/zones/db.1.168.192" do
+   source "bind_zones_db.1.168.192"
    mode 0644
    owner "root"
    group "root"
