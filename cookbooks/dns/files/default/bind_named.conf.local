@@ -44,6 +44,23 @@ zone  "2.168.192.in-addr.arpa"        {
 #team8
 
 #forward zone
+zone  "psa-team81.informatik.tu-muenchen.de"   {
+    type slave;
+    masters {
+      192.168.8.5; 
+    };
+    file    "back/psa-team81.informatik.tu-muenchen.de.bak";
+};
+#reverse zone
+zone  "81.168.192.in-addr.arpa"        {
+    type slave;
+    masters {
+      192.168.8.5; 
+    };
+    file    "back/81.168.192.bak";
+};
+
+#forward zone
 zone  "psa-team8.informatik.tu-muenchen.de"   {
     type slave;
     masters {

@@ -66,6 +66,20 @@ if node['platform'] == 'debian'
    group "root"
   end
   
+  cookbook_file "/etc/bind/zones/db.psa-team21.informatik.tu-muenchen.de" do
+   source "bind_zones_db.psa-team21.informatik.tu-muenchen.de"
+   mode 0644
+   owner "root"
+   group "root"
+  end
+  
+  cookbook_file "/etc/bind/zones/db.21.168.192" do
+   source "bind_zones_db.21.168.192"
+   mode 0644
+   owner "root"
+   group "root"
+  end
+  
   #team2
   
   service "bind9" do

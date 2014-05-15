@@ -19,20 +19,29 @@ options {
   // If BIND logs error messages about the root key being expired,
   // you will need to update your keys.  See https://www.isc.org/bind-keys
   //========================================================================
-  # dnssec-validation auto;
+  dnssec-validation no;
+  dnssec-enable no;
   
   #transfer
   allow-transfer  {
-    192.168.2.3;
-    192.168.8.5;
+    192.168.0.0/16;
   };
   notify yes;
   
   allow-notify {
-    192.168.2.3;
-    192.168.8.5;
+    127.0.0.1;
+    192.168.0.0/16;
   };
   
+  allow-query {
+    192.168.0.0/16;
+  };
+  
+  recursion yes;
+  
+  transfers-in 30;
+  transfers-out 30;
+   
   auth-nxdomain no;    # conform to RFC1035
   listen-on-v6 { any; };
 };
