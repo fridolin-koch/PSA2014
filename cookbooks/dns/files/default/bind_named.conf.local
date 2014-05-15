@@ -9,6 +9,19 @@ zone  "1.168.192.in-addr.arpa"        {
     file    "/etc/bind/zones/db.1.168.192";
 };
 
+#shared net 21
+
+#forward zone
+zone  "psa-team21.informatik.tu-muenchen.de"   {
+    type master;
+    file    "/etc/bind/zones/db.psa-team21.informatik.tu-muenchen.de";
+};
+#reverse zone
+zone  "21.168.192.in-addr.arpa"        {
+    type master;
+    file    "/etc/bind/zones/db.21.168.192";
+};
+
 #team2
 
 #forward zone

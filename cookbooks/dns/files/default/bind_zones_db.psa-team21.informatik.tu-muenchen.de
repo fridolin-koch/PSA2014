@@ -1,0 +1,19 @@
+;
+; BIND data file for psa-team21.informatik.tu-muenchen.de
+;
+$TTL	3600
+@	IN	SOA	psa-team21.informatik.tu-muenchen.de. zonemaster.psa-team21.informatik.tu-muenchen.de. (
+			      5		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+	IN	A	192.168.21.1
+
+; 192.168.21.0/24
+
+@                       IN NS      down.psa-team21.informatik.tu-muenchen.de.
+@                       IN A       192.168.21.1
+
+down                    IN A       192.168.21.1
+up                      IN A       192.168.21.2
