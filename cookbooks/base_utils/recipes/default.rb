@@ -217,6 +217,16 @@ if node['platform'] == 'debian'
      owner "root"
      group "root"
     end
+    
+    #dhcp client config for eth0
+    
+    cookbook_file "/etc/dhcp/dhclient.conf" do
+     source "etc_dhcp_dhclient.conf"
+     mode 0644
+     owner "root"
+     group "root"
+    end
+    
   
   end
   
