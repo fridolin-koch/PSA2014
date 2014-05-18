@@ -76,7 +76,12 @@ if node['platform'] == 'debian'
   package "dnsutils" do
     action :install
   end
-  
+  package "tcpdump" do
+    action :install
+  end
+  package "lynx" do
+    action :install
+  end
   
   #ssh server banner
   template "/etc/motd" do
