@@ -65,6 +65,48 @@ if node['platform'] == 'debian'
     action :install
   end
   
+  #create www-root
   
+  directory "/var/www" do
+    owner "www-data"
+    group "www-data"
+    mode 0755
+    action :create
+  end
+  
+  #create subdirecories for each domain
+  
+  directory "/var/www/www1.psa-team1" do
+    owner "www-data"
+    group "www-data"
+    mode 0755
+    action :create
+  end
+  
+  directory "/var/www/www2.psa-team1" do
+    owner "www-data"
+    group "www-data"
+    mode 0755
+    action :create
+  end
+  
+  #create site config
+  
+  cookbook_file "/etc/nginx/sites-available/www1" do
+    source "nginx_site_www1"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
+  #make links to enabled 
+  link "/etc/nginx/sites-enabled/www" do
+    to "/etc/nginx/sites-available/www1"
+  end
+  
+  #restart nginx
+  service "nginx" do
+    action :restart
+  end
   
 end
