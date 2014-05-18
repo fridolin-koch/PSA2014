@@ -114,20 +114,19 @@ if node['platform'] == 'debian'
       })
     end
     
-  end
+    #create site config
+    cookbook_file "/etc/nginx/sites-available/#{host}" do
+      source "nginx_site_#{host}"
+      mode 0644
+      owner "root"
+      group "root"
+    end
   
-  #create site config
-  
-  cookbook_file "/etc/nginx/sites-available/www" do
-    source "nginx_site_www"
-    mode 0644
-    owner "root"
-    group "root"
-  end
-  
-  #make links to enabled 
-  link "/etc/nginx/sites-enabled/www" do
-    to "/etc/nginx/sites-available/www"
+    #make links to enabled 
+    link "/etc/nginx/sites-enabled/#{host}" do
+      to "/etc/nginx/sites-available/#{host}"
+    end
+    
   end
   
   #restart nginx
