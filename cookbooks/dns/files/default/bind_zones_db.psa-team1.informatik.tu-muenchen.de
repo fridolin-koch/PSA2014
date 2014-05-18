@@ -28,4 +28,4 @@ node4                    IN A       192.168.1.4
 gw                       IN CNAME   node1
 chef                     IN CNAME   node3
 www                      IN CNAME   node2
-www1                     IN CNAME   wwww
+www1                     IN CNAME   www
