@@ -32,8 +32,8 @@ COMMIT
 -A OUTPUT -p icmp -j ACCEPT
 
 #Allow dns traffic
--A OUTPUT -p udp --dport 53 -j ACCEPT
--A INPUT -p udp --sport 53 -j ACCEPT
+-A OUTPUT --dport 53 -j ACCEPT
+-A INPUT --sport 53 -j ACCEPT
 
 #ssh forwardings
 #-A INPUT -p tcp --sport 60102 -j ACCEPT
