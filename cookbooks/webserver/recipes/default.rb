@@ -65,6 +65,24 @@ if node['platform'] == 'debian'
     action :install
   end
   
+  #cert storage
+  directory "/etc/nginx/certs" do
+    owner "root"
+    group "root"
+    mode 0755
+    action :create
+  end
+  
+  #certs
+  ["www.key", "www.pem", "www2.key", "www2.pem"].each do |file|
+    cookbook_file "/etc/nginx/certs/#{file}" do
+      source "nginx_certs_#{file}"
+      mode 0644
+      owner "root"
+      group "root"
+    end
+  end
+  
   #create www-root
   
   directory "/var/www" do
@@ -76,24 +94,32 @@ if node['platform'] == 'debian'
   
   #create subdirecories for each domain
   
-  directory "/var/www/www1.psa-team1" do
-    owner "www-data"
-    group "www-data"
-    mode 0755
-    action :create
-  end
-  
-  directory "/var/www/www2.psa-team1" do
-    owner "www-data"
-    group "www-data"
-    mode 0755
-    action :create
+  ["www", "www1", "www2"].each do |host|
+    
+    directory "/var/www/#{host}" do
+      owner "www-data"
+      group "www-data"
+      mode 0755
+      action :create
+    end
+    
+    #create some index document
+    template "/var/www/#{host}/index.html" do
+      source "index.html.erb"
+      mode 0644
+      owner "www-data"
+      group "www-data"
+      variables({
+        :host => "#{host}.psa-team1.informatik.tu-muenchen.de"
+      })
+    end
+    
   end
   
   #create site config
   
-  cookbook_file "/etc/nginx/sites-available/www1" do
-    source "nginx_site_www1"
+  cookbook_file "/etc/nginx/sites-available/www" do
+    source "nginx_site_www"
     mode 0644
     owner "root"
     group "root"
@@ -101,7 +127,7 @@ if node['platform'] == 'debian'
   
   #make links to enabled 
   link "/etc/nginx/sites-enabled/www" do
-    to "/etc/nginx/sites-available/www1"
+    to "/etc/nginx/sites-available/www"
   end
   
   #restart nginx
