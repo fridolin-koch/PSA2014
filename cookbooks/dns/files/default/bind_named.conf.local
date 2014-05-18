@@ -41,7 +41,7 @@ zone  "2.168.192.in-addr.arpa"        {
     file    "back/2.168.192.bak";
 };
 
-#team8
+// Team 8 subnets (Transfair)
 
 #forward zone
 zone  "psa-team81.informatik.tu-muenchen.de"   {
@@ -57,16 +57,16 @@ zone  "81.168.192.in-addr.arpa"        {
     masters {
       192.168.8.5; 
     };
-    file    "back/81.168.192.bak";
+    file "back/81.168.192.bak";
 };
 
 #forward zone
 zone  "psa-team8.informatik.tu-muenchen.de"   {
     type slave;
     masters {
-      192.168.8.5; 
+      192.168.8.5;
     };
-    file    "back/psa-team8.informatik.tu-muenchen.de.bak";
+    file "back/psa-team8.informatik.tu-muenchen.de.bak";
 };
 #reverse zone
 zone  "8.168.192.in-addr.arpa"        {
@@ -74,5 +74,149 @@ zone  "8.168.192.in-addr.arpa"        {
     masters {
       192.168.8.5; 
     };
-    file    "back/8.168.192.bak";
+    file "back/8.168.192.bak";
 };
+
+// Team 3 Subnets
+
+zone "psa-team3.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.3.1;
+    192.168.2.3;
+    192.168.4.2;
+  };
+};
+zone "3.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.3.1;
+    192.168.2.3;
+    192.168.4.2; 
+  };
+};
+zone "psa-team43.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.3.1;
+    192.168.2.3;
+    192.168.4.2;
+  };
+};
+zone "43.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.3.1;
+    192.168.2.3;
+    192.168.4.2;
+  };
+};
+
+
+// Team 4 Subnets
+
+zone "psa-team4.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.4.2;
+    192.168.3.1;
+    192.168.5.5;
+  };
+};
+zone "4.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.4.2;
+    192.168.3.1;
+    192.168.5.5; 
+  };
+};
+zone "psa-team54.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.4.2;
+    192.168.3.1;
+    192.168.5.5;
+  };
+};
+zone "54.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.4.2;
+    192.168.3.1;
+    192.168.5.5;
+  };
+};
+
+
+// Team 5 Subnets
+
+zone "psa-team5.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.5.5;
+    192.168.4.2;
+    192.168.7.3;
+  };
+};
+zone "5.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.5.5;
+    192.168.4.2;
+    192.168.7.3;
+  };
+};
+zone "psa-team76.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.5.5;
+    192.168.4.2;
+    192.168.7.3;
+  };
+};
+zone "76.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.5.5;
+    192.168.4.2;
+    192.168.7.3;
+  };
+};
+
+
+// Team 7 Subnets
+
+zone "psa-team7.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.7.3;
+    192.168.5.5;
+    192.168.8.5;
+  };
+};
+zone "7.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.7.3;
+    192.168.5.5;
+    192.168.8.5;
+  };
+};
+zone "psa-team87.informatik.tu-muenchen.de" {
+  type forward;
+  forwarders {
+    192.168.7.3;
+    192.168.5.5;
+    192.168.8.5;
+  };
+};
+zone "87.168.192.in-addr.arpa" {
+  type forward;
+  forwarders {
+    192.168.7.3;
+    192.168.5.5;
+    192.168.8.5;
+  };
+};
+
