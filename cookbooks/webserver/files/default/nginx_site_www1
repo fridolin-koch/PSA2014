@@ -1,5 +1,5 @@
 server {
-	listen 80 default_server;
+	listen 80;
 
 	root /var/www/www1;
 	index index.html index.htm;

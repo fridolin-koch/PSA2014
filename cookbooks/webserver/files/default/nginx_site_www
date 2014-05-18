@@ -6,6 +6,11 @@ server {
 
 	# Make site accessible from http://www.psa-team1.informatik.tu-muenchen.de/
 	server_name www.psa-team1.informatik.tu-muenchen.de;
+  
+  location ~ ^/~(.+?)(/.*)?$ {
+    alias /home/$1/.html-data$2;
+    index  index.html index.htm;
+  }
 }
 
 
@@ -19,7 +24,7 @@ server {
   index index.html index.htm;
 
   ssl on;
-  ssl_certificate /etc/nginx/certs/www.pem;
+  ssl_certificate /etc/nginx/certs/www.crt;
   ssl_certificate_key /etc/nginx/certs/www.key;
 
   ssl_session_timeout 5m;

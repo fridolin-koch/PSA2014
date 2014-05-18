@@ -2,7 +2,7 @@
 # HTTP server
 #
 server {
-	listen 80 default_server;
+	listen 80;
 
 	root /var/www/www2;
 	index index.html index.htm;
@@ -23,7 +23,7 @@ server {
   index index.html index.htm;
 
   ssl on;
-  ssl_certificate /etc/nginx/certs/www2.pem;
+  ssl_certificate /etc/nginx/certs/www2.crt;
   ssl_certificate_key /etc/nginx/certs/www2.key;
 
   ssl_session_timeout 5m;
