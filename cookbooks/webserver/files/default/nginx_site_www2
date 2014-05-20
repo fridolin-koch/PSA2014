@@ -6,6 +6,9 @@ server {
 
 	root /var/www/www2;
 	index index.html index.htm;
+  
+  error_log /var/log/nginx/www2-error.log;
+  access_log /var/log/nginx/www2-access.log without_ip;
 
 	# Make site accessible from http://www2.psa-team1.informatik.tu-muenchen.de/
 	server_name www2.psa-team1.informatik.tu-muenchen.de;
@@ -18,6 +21,9 @@ server {
 server {
   listen 443;
   server_name www2.psa-team1.informatik.tu-muenchen.de;
+
+  error_log /var/log/nginx/www2-error.log;
+  access_log /var/log/nginx/www2-access.log without_ip;
 
   root /var/www/www2;
   index index.html index.htm;

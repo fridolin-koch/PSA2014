@@ -1,0 +1,36 @@
+/var/log/nginx/*access.log {
+  daily
+  missingok
+  rotate 3
+  compress
+  delaycompress
+  notifempty
+  create 0640 www-data adm
+  sharedscripts
+  prerotate
+    if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+      run-parts /etc/logrotate.d/httpd-prerotate; \
+    fi \
+  endscript
+  postrotate
+    [ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`
+  endscript
+}
+
+/var/log/nginx/*error.log {
+  daily
+  missingok
+  rotate 1
+  notifempty
+  create 0640 www-data adm
+  sharedscripts
+  prerotate
+    if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+      run-parts /etc/logrotate.d/httpd-prerotate; \
+    fi \
+  endscript
+  postrotate
+    [ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`
+  endscript
+}
+

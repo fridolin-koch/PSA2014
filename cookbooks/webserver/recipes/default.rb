@@ -94,6 +94,8 @@ if node['platform'] == 'debian'
   
   #create subdirecories for each domain
   
+  count = 1
+  
   ["www", "www1", "www2"].each do |host|
     
     directory "/var/www/#{host}" do
@@ -110,9 +112,12 @@ if node['platform'] == 'debian'
       owner "www-data"
       group "www-data"
       variables({
-        :host => "#{host}.psa-team1.informatik.tu-muenchen.de"
+        :host => "#{host}.psa-team1.informatik.tu-muenchen.de",
+        :comment => "Das hier ist der #{count}.-Teil der Aufgabe Webserver"
       })
     end
+    
+    count += 1
     
     #create site config
     cookbook_file "/etc/nginx/sites-available/#{host}" do
@@ -127,6 +132,13 @@ if node['platform'] == 'debian'
       to "/etc/nginx/sites-available/#{host}"
     end
     
+  end
+  
+  cookbook_file "/etc/nginx/nginx.conf" do
+    source "nginx.conf"
+    mode 0644
+    owner "root"
+    group "root"
   end
   
   #restart nginx
@@ -150,8 +162,24 @@ if node['platform'] == 'debian'
     group "root"
   end
   
+  cookbook_file "/etc/php5/fpm/prepend.php" do
+    source "prepend.php"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
   service "php5-fpm" do
     action :restart
   end
+  
+  #logrotate
+  cookbook_file "/etc/logrotate.d/nginx" do
+    source "logrotate_nginx"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
   
 end
