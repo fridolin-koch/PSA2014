@@ -134,4 +134,24 @@ if node['platform'] == 'debian'
     action :restart
   end
   
+  #phpfpm
+  
+  cookbook_file "/etc/php5/fpm/pool.d/www.conf" do
+    source "phpfpm_pool_www.conf"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
+  cookbook_file "/etc/php5/fpm/pool.d/users.conf" do
+    source "phpfpm_pool_users.conf"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+  
+  service "php5-fpm" do
+    action :restart
+  end
+  
 end

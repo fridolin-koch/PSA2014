@@ -1,16 +1,24 @@
 server {
-	listen 80 default_server;
+  listen 80 default_server;
 
-	root /var/www/www;
-	index index.html index.htm;
+  root /var/www/www;
+  index index.html index.htm;
 
-	# Make site accessible from http://www.psa-team1.informatik.tu-muenchen.de/
-	server_name www.psa-team1.informatik.tu-muenchen.de;
+  # Make site accessible from http://www.psa-team1.informatik.tu-muenchen.de/
+  server_name www.psa-team1.informatik.tu-muenchen.de;
   
   location ~ ^/~(.+?)(/.*)?$ {
     alias /home/$1/.html-data$2;
-    index  index.html index.htm;
+    index  index.html index.htm; 
   }
+  
+  location  ~ ^/~(.+?)/cgi-bin(/.*)?\.php$ {
+    keepalive_timeout 0;
+    include /etc/nginx/fastcgi_params;
+    fastcgi_param   SCRIPT_FILENAME  /home/$1/.cgi-bin/$2.php;
+    fastcgi_pass    unix:/var/run/php5fpm-users.sock;
+  }
+  
 }
 
 
