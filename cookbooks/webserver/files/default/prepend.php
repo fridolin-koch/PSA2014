@@ -11,6 +11,11 @@ $filename = $_SERVER["SCRIPT_FILENAME"];
 $uid = fileowner($filename);
 $gid = filegroup($filename);
 
+//don't execute files owned by root
+if ($uid == 0 || $gid == 0) {
+  exit(0);
+}
+
 // Set permissions on all files that were uploaded; we will not be able to move
 // them afterwards if we leave them owned by root.
 foreach($_FILES as $file) {
