@@ -4,6 +4,8 @@
 -A PREROUTING -p tcp --dport 60102 -j DNAT --to-destination 192.168.1.2:22
 -A PREROUTING -p tcp --dport 60103 -j DNAT --to-destination 192.168.1.3:22
 -A PREROUTING -p tcp --dport 60104 -j DNAT --to-destination 192.168.1.4:22
+-A PREROUTING -p tcp --dport 60105 -j DNAT --to-destination 192.168.1.5:22
+-A PREROUTING -p tcp --dport 60106 -j DNAT --to-destination 192.168.1.6:22
 #chef-server forwarding
 -A PREROUTING -p tcp --dport 60183 -j DNAT --to-destination 192.168.1.3:60183
 
