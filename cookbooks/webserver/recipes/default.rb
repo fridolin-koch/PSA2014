@@ -77,7 +77,7 @@ if node['platform'] == 'debian'
   ["www.key", "www.crt", "www2.key", "www2.crt"].each do |file|
     cookbook_file "/etc/nginx/certs/#{file}" do
       source "nginx_certs_#{file}"
-      mode 0644
+      mode 0600
       owner "root"
       group "root"
     end
