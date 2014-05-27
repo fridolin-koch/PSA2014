@@ -13,6 +13,7 @@ $gid = filegroup($filename);
 
 //don't execute files owned by root
 if ($uid == 0 || $gid == 0) {
+  trigger_error('Executing files owned by root is not allowed.', E_USER);
   exit(0);
 }
 
