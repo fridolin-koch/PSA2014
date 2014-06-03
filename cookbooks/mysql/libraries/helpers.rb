@@ -142,6 +142,10 @@ module Opscode
               '5.5' => {
                 'package_name' => 'mysql-server-5.5',
                 'service_name' => 'mysqld'
+              },
+              '5.6' => {
+                'package_name' => 'mysql-server-5.6',
+                'service_name' => 'mysqld'
               }
             },
             'jessie/sid' => {
