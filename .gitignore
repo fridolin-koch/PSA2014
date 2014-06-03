@@ -7,3 +7,5 @@
 .chef/*.pem
 
 .chef/syntax_check_cache
+
+data_bags
