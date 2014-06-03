@@ -1,10 +1,8 @@
 #
 # Cookbook Name:: database
-# Recipe:: default
+# Recipe:: master
 #
-# Copyright 2014, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
+# Copyright 2014, Fridolin Koch, Matthias Lang
 #
 
 #load data bag
