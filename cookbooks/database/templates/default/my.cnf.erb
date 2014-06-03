@@ -1,0 +1,11 @@
+[mysqld]               
+server-id               = <%= node['mysql']['server-id'] %>
+<% if @master %>
+#master config
+log_bin                 = /var/log/mysql/mysql-bin.log
+expire_logs_days        = 10
+max_binlog_size         = 200M
+
+<% else %>
+#slave config
+<% end %>

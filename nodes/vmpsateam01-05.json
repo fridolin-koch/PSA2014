@@ -12,11 +12,13 @@
       }
     },
     "mysql": {
-      "version": "5.6"
+      "version": "5.6",
+      "server-id": 1,
+      "type": "master"
     }
   },
   "run_list": [
     "recipe[base_utils]",
-    "recipe[database::master]"
+    "recipe[database]"
   ]
 }

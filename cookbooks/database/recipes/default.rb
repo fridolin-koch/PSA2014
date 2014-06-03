@@ -13,6 +13,24 @@ node.set['mysql']['server_root_password'] = mysql_creds['root_password']
 
 include_recipe 'mysql::server'
 
+#is master?
+master = node['mysql']['type'] == 'master'
+
+#mysql config 
+template '/etc/mysql/conf.d/master-slave.cnf' do
+  source 'my.cnf.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables({
+    :master => master
+  })
+end
+
+service "mysql" do
+  action :restart
+end
+
 #init database
 template '/etc/mysql/init.sql' do
   source 'init.sql.erb'
@@ -20,7 +38,8 @@ template '/etc/mysql/init.sql' do
   group 'root'
   mode '0600'
   variables({
-    :creds => mysql_creds
+    :creds => mysql_creds,
+    :master => master
   })
 end
  
