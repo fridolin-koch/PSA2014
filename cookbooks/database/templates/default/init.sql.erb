@@ -7,6 +7,6 @@ GRANT ALL ON  `db02`.* TO 'db02'@'192.168.0.2' IDENTIFIED BY '<%= @creds['passwo
 GRANT ALL ON  `db02`.* TO 'db02'@'node2.psa-team1.informatik.tu-muenchen.de' IDENTIFIED BY '<%= @creds['passwords']['db02'] %>';
 
 #readall
-GRANT SELECT ON  `dbRead`.* TO 'dbRead'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['dbRead'] %>';
+GRANT SELECT, SHOW DATABASES ON *.* TO 'dbRead'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['dbRead'] %>';
 
 FLUSH PRIVILEGES;
