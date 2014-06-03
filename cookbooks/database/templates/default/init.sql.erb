@@ -1,12 +1,12 @@
 #db01
 CREATE DATABASE IF NOT EXISTS `db01` DEFAULT CHARACTER SET utf8;
-GRANT ALL ON  `db01`.* TO 'db01'@'localhost' IDENTIFIED BY <%= @creds['passwords']['db01'] %>;
+GRANT ALL ON  `db01`.* TO 'db01'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['db01'] %>';
 #db02
 CREATE DATABASE IF NOT EXISTS `db02` DEFAULT CHARACTER SET utf8;
-GRANT ALL ON  `db02`.* TO 'db02'@'192.168.0.2' IDENTIFIED BY <%= @creds['passwords']['db02'] %>;
-GRANT ALL ON  `db02`.* TO 'db02'@'node2.psa-team1.informatik.tu-muenchen.de' IDENTIFIED BY <%= @creds['passwords']['db02'] %>;
+GRANT ALL ON  `db02`.* TO 'db02'@'192.168.0.2' IDENTIFIED BY '<%= @creds['passwords']['db02'] %>';
+GRANT ALL ON  `db02`.* TO 'db02'@'node2.psa-team1.informatik.tu-muenchen.de' IDENTIFIED BY '<%= @creds['passwords']['db02'] %>';
 
 #readall
-GRANT SELECT ON  `dbRead`.* TO 'dbRead'@'localhost' IDENTIFIED BY <%= @creds['passwords']['dbRead'] %>;
+GRANT SELECT ON  `dbRead`.* TO 'dbRead'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['dbRead'] %>';
 
 FLUSH PRIVILEGES;
