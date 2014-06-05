@@ -17,7 +17,6 @@ GRANT REPLICATION SLAVE ON *.* TO repl@'node6.psa-team1.informatik.tu-muenchen.d
 <% else %>
 #only on slave
 CHANGE MASTER TO MASTER_HOST='node5.psa-team1.informatik.tu-muenchen.de', MASTER_USER='repl', MASTER_PASSWORD='<%= @creds['passwords']['repl'] %>';
-slave start;
 <% end %>
 
 FLUSH PRIVILEGES;

@@ -33,13 +33,13 @@ fi
 echo "Selected period: $PERIOD."
 
 #stop slave
-${MYSQLADMIN} stop-slave
+${MYSQLADMIN} --host=localhost --port=3306 --user=dbRead --password=<%= @creds['root_password'] %> stop-slave
 
 #make backup
 ${MYSQLDUMPPATH} --host=localhost --port=3306 --user=dbRead --password=<%= @creds['passwords']['dbRead'] %> --all-databases > ${MYSQLDUMPPATH}/mysql.sql
 
 #start slave
-${MYSQLADMIN} stop-slave
+${MYSQLADMIN} --host=localhost --port=3306 --user=dbRead --password=<%= @creds['root_password'] %>  stop-slave
 
 #compress file
 tar cvzf ${TARGET_PATH}/mysql_${PERIOD}_${DATESTAMP}.tar.gz ${MYSQLDUMPPATH}/mysql.sql
