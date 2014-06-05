@@ -1,0 +1,4 @@
+#create backup
+0 1 * * * root /usr/local/bin/create-mysql-backup >> /var/log/cron/create-mysql-backup.log 2>&1
+#cleanup
+0 1 * * * root /usr/local/bin/cleanup-mysql-backup >> /var/log/cron/cleanup-mysql-backup.log 2>&1
