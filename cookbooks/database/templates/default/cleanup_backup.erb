@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# delete daily
+find <%= node['mysql']['backup_dir'] %> -name "*day*" -ctime 7 -type f -delete -fprint cleanup_log_daily
+
+# delete weekly
+find <%= node['mysql']['backup_dir'] %> -name "*week*" -ctime 28 -type f -delete -fprint cleanup_weekly
+
+# delete monthly
+find <%= node['mysql']['backup_dir'] %> -name "*month*" -ctime 93 -type f -delete -fprint cleanup_monthly
+
