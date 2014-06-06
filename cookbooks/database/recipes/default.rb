@@ -56,6 +56,7 @@ if !master
     owner "root"
     group "root"
     mode 0700
+    recursive true
     action :create
   end
   
@@ -64,6 +65,7 @@ if !master
     owner "root"
     group "root"
     mode 0755
+    recursive true
     action :create
   end
   
@@ -81,6 +83,9 @@ if !master
     owner 'root'
     group 'root'
     mode '0700'
+    variables({
+      :creds => mysql_creds
+    })
   end
   
   #cron script

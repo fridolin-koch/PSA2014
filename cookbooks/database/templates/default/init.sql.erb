@@ -7,16 +7,21 @@ GRANT ALL ON  `db01`.* TO 'db01'@'localhost' IDENTIFIED BY '<%= @creds['password
 CREATE DATABASE IF NOT EXISTS `db02` DEFAULT CHARACTER SET utf8;
 GRANT ALL ON  `db02`.* TO 'db02'@'192.168.1.2' IDENTIFIED BY '<%= @creds['passwords']['db02'] %>';
 GRANT ALL ON  `db02`.* TO 'db02'@'node2.psa-team1.informatik.tu-muenchen.de' IDENTIFIED BY '<%= @creds['passwords']['db02'] %>';
-
 #readall
 GRANT SELECT, SHOW DATABASES ON *.* TO 'dbRead'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['dbRead'] %>';
+
+#backup user
+GRANT SELECT, SHOW DATABASES, LOCK TABLES ON *.* TO 'backup'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['backup'] %>';
+
 
 GRANT REPLICATION SLAVE ON *.* TO repl@'192.168.1.6' IDENTIFIED BY '<%= @creds['passwords']['repl'] %>';
 GRANT REPLICATION SLAVE ON *.* TO repl@'node6.psa-team1.informatik.tu-muenchen.de' IDENTIFIED BY '<%= @creds['passwords']['repl'] %>';
 
 <% else %>
-#only on slave
+#only on slave#
+stop slave;
 CHANGE MASTER TO MASTER_HOST='node5.psa-team1.informatik.tu-muenchen.de', MASTER_USER='repl', MASTER_PASSWORD='<%= @creds['passwords']['repl'] %>';
+start slave;
 <% end %>
 
 FLUSH PRIVILEGES;

@@ -260,7 +260,7 @@ if node['platform'] == 'debian'
   end
   
   execute "Restart network" do
-    command "invoke-rc.d networking stop; sleep 2; invoke-rc.d networking start"
+    command "ifdown eth1 && ifup eth1"
     action :run
   end
   
