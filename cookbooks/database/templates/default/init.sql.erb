@@ -13,9 +13,12 @@ GRANT SELECT, SHOW DATABASES ON *.* TO 'dbRead'@'localhost' IDENTIFIED BY '<%= @
 #backup user
 GRANT SELECT, SHOW DATABASES, LOCK TABLES ON *.* TO 'backup'@'localhost' IDENTIFIED BY '<%= @creds['passwords']['backup'] %>';
 
-
 GRANT REPLICATION SLAVE ON *.* TO repl@'192.168.1.6' IDENTIFIED BY '<%= @creds['passwords']['repl'] %>';
 GRANT REPLICATION SLAVE ON *.* TO repl@'node6.psa-team1.informatik.tu-muenchen.de' IDENTIFIED BY '<%= @creds['passwords']['repl'] %>';
+
+#team02
+CREATE DATABASE IF NOT EXISTS `team2db01` DEFAULT CHARACTER SET utf8;
+GRANT ALL ON `team2db01`.* TO 'db02'@'192.168.2.%' IDENTIFIED BY '<%= @creds['passwords']['team2db01'] %>';
 
 <% else %>
 #only on slave#
