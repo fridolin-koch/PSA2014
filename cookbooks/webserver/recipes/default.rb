@@ -96,7 +96,7 @@ if node['platform'] == 'debian'
   
   count = 1
   
-  ["www", "www1", "www2"].each do |host|
+  ["www", "www1", "www2", "piwik"].each do |host|
     
     directory "/var/www/#{host}" do
       owner "www-data"
@@ -105,16 +105,19 @@ if node['platform'] == 'debian'
       action :create
     end
     
-    #create some index document
-    template "/var/www/#{host}/index.html" do
-      source "index.html.erb"
-      mode 0644
-      owner "www-data"
-      group "www-data"
-      variables({
-        :host => "#{host}.psa-team1.informatik.tu-muenchen.de",
-        :comment => "Das hier ist der #{count}.-Teil der Aufgabe Webserver"
-      })
+    if host != 'piwik'
+    
+      #create some index document
+      template "/var/www/#{host}/index.html" do
+        source "index.html.erb"
+        mode 0644
+        owner "www-data"
+        group "www-data"
+        variables({
+          :host => "#{host}.psa-team1.informatik.tu-muenchen.de",
+          :comment => "Das hier ist der #{count}.-Teil der Aufgabe Webserver"
+        })
+      end  
     end
     
     count += 1
