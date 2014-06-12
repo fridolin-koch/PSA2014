@@ -184,5 +184,24 @@ if node['platform'] == 'debian'
     group "root"
   end
   
+  #piwik cronjob
+  
+  #cron log direcotry
+  directory '/var/log/cron' do
+    owner "root"
+    group "root"
+    mode 0775
+    recursive true
+    action :create
+  end
+  
+  #cron script
+  cookbook_file '/etc/cron.d/piwik' do
+    source 'cron_piwik'
+    owner 'root'
+    group 'root'
+    mode '0644'
+  end
+  
   
 end

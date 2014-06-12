@@ -10,13 +10,13 @@ auto eth0
 iface eth0 inet dhcp
 <% end %>
 
-<% if !node['networking']['eth1']['address'].nil? && !node['networking']['gateway']%>
+<% if !node['networking']['eth1']['address'].nil? && !node['networking']['gateway'] %>
 auto eth1
 allow-hotplug eth1
 iface eth1 inet dhcp
 <% end %>
 
-<% if !node['networking']['eth1:0']['address'].nil? && !node['networking']['gateway']%>
+<% if !node['networking']['eth1:0']['address'].nil? && !node['networking']['gateway'] %>
 auto eth1:0
 allow-hotplug eth1:0
 iface eth1:0 inet static

@@ -3,7 +3,8 @@
 #
 server {
 	listen 80;
-
+  server_name www2.psa-team1.informatik.tu-muenchen.de;
+  
 	root /var/www/www2;
 	index index.html index.htm;
   
