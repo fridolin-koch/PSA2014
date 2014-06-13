@@ -22,3 +22,30 @@ server {
   }
 
 }
+
+
+server {
+  
+  listen 8080 default_server;
+
+  root /var/www/piwik;
+  index index.php;
+
+  error_log /var/log/nginx/piwik-error.log;
+  access_log /var/log/nginx/piwik-access.log without_ip;
+
+  server_name piwik.psa-team1.informatik.tu-muenchen.de;
+  
+
+  # Relay all index.php requests to fastcgi.
+  location ~* ^/(?:index|piwik)\.php$ {
+    include /etc/nginx/fastcgi_params;
+    fastcgi_pass unix:/var/run/php5fpm-www.sock;
+  }
+
+  # Any other attempt to access PHP files returns a 404.
+  location ~* ^.+\.php$ {
+    return 404; 
+  }
+
+}
