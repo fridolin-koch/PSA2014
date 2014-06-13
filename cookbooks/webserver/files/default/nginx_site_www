@@ -60,3 +60,21 @@ server {
   }
 
 }
+
+server {
+  
+  listen 8080 default_server;
+
+  root /var/www/piwik;
+
+  access_log off;
+  error_log off;
+
+
+  location / {
+    proxy_set_header        Host piwik.psa-team1.informatik.tu-muenchen.de;
+    proxy_set_header        X-Real-IP       $remote_addr;
+    proxy_pass http://piwik.psa-team1.informatik.tu-muenchen.de;
+  }
+
+}

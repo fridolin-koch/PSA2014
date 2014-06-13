@@ -1,2 +1,1 @@
-* * * * * www-data /usr/bin/php /var/www/piwik/console core:archive --url=http://piwik.psa-team1.informatik.tu-muenchen.de > /var/log/cron/piwik.log
-
+* * * * * www-data /usr/bin/php /var/www/piwik/console core:archive --url=http://piwik.psa-team1.informatik.tu-muenchen.de > /var/www/piwik/cron.log 2>&1
