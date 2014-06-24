@@ -15,4 +15,6 @@ $TTL	3600
 2                    IN PTR     node2.psa-team1.informatik.tu-muenchen.de.
 3                    IN PTR     node3.psa-team1.informatik.tu-muenchen.de.
 4                    IN PTR     node4.psa-team1.informatik.tu-muenchen.de.
-
+5										 IN PTR     node5.psa-team1.informatik.tu-muenchen.de.
+6										 IN PTR     node6.psa-team1.informatik.tu-muenchen.de.
+7										 IN PTR     node7.psa-team1.informatik.tu-muenchen.de.
