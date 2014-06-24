@@ -1,0 +1,18 @@
+{
+  "name": "vmpsateam01-07.vmpsateam01-07",
+  "chef_environment": "_default",
+  "normal": {
+    "tags": [
+
+    ],
+    "networking": {
+      "eth1": {
+        "address": "192.168.1.7",
+        "gateway": "192.168.1.1"
+      }
+    }
+  },
+  "run_list": [
+    "recipe[base_utils]"
+  ]
+}
