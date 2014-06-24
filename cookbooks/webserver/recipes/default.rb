@@ -7,7 +7,7 @@
 
 #we only support debian at this time
 if node['platform'] == 'debian'
-  
+
   #install packages
   #nginx (dotdeb)
   package "nginx-common" do
@@ -64,7 +64,7 @@ if node['platform'] == 'debian'
   package "php5-fpm" do
     action :install
   end
-  
+
   #cert storage
   directory "/etc/nginx/certs" do
     owner "root"
@@ -72,7 +72,7 @@ if node['platform'] == 'debian'
     mode 0755
     action :create
   end
-  
+
   #certs
   ["www.key", "www.crt", "www2.key", "www2.crt"].each do |file|
     cookbook_file "/etc/nginx/certs/#{file}" do
@@ -82,31 +82,37 @@ if node['platform'] == 'debian'
       group "root"
     end
   end
-  
+
   #create www-root
-  
   directory "/var/www" do
     owner "www-data"
     group "www-data"
     mode 0755
     action :create
   end
-  
+
+  #mount
+  mount "/var/www" do
+    device "192.168.1.7:/fs/webserver"
+    fstype "nfs"
+    options "rw"
+    action [:mount, :enable]
+  end
+
   #create subdirecories for each domain
-  
   count = 1
-  
+
   ["www", "www1", "www2", "piwik"].each do |host|
-    
+
     directory "/var/www/#{host}" do
       owner "www-data"
       group "www-data"
       mode 0755
       action :create
     end
-    
+
     if host != 'piwik'
-    
+
       #create some index document
       template "/var/www/#{host}/index.html" do
         source "index.html.erb"
@@ -117,11 +123,11 @@ if node['platform'] == 'debian'
           :host => "#{host}.psa-team1.informatik.tu-muenchen.de",
           :comment => "Das hier ist der #{count}.-Teil der Aufgabe Webserver"
         })
-      end  
+      end
     end
-    
+
     count += 1
-    
+
     #create site config
     cookbook_file "/etc/nginx/sites-available/#{host}" do
       source "nginx_site_#{host}"
@@ -129,53 +135,53 @@ if node['platform'] == 'debian'
       owner "root"
       group "root"
     end
-  
-    #make links to enabled 
+
+    #make links to enabled
     link "/etc/nginx/sites-enabled/#{host}" do
       to "/etc/nginx/sites-available/#{host}"
     end
-    
+
   end
-  
+
   cookbook_file "/etc/nginx/nginx.conf" do
     source "nginx.conf"
     mode 0644
     owner "root"
     group "root"
   end
-  
+
   #restart nginx
   service "nginx" do
     action :restart
   end
-  
+
   #phpfpm
-  
+
   cookbook_file "/etc/php5/fpm/pool.d/www.conf" do
     source "phpfpm_pool_www.conf"
     mode 0644
     owner "root"
     group "root"
   end
-  
+
   cookbook_file "/etc/php5/fpm/pool.d/users.conf" do
     source "phpfpm_pool_users.conf"
     mode 0644
     owner "root"
     group "root"
   end
-  
+
   cookbook_file "/etc/php5/fpm/prepend.php" do
     source "prepend.php"
     mode 0644
     owner "root"
     group "root"
   end
-  
+
   service "php5-fpm" do
     action :restart
   end
-  
+
   #logrotate
   cookbook_file "/etc/logrotate.d/nginx" do
     source "logrotate_nginx"
@@ -183,9 +189,9 @@ if node['platform'] == 'debian'
     owner "root"
     group "root"
   end
-  
+
   #piwik cronjob
-  
+
   #cron log direcotry
   directory '/var/log/cron' do
     owner "root"
@@ -194,7 +200,7 @@ if node['platform'] == 'debian'
     recursive true
     action :create
   end
-  
+
   #cron script
   cookbook_file '/etc/cron.d/piwik' do
     source 'cron_piwik'
@@ -202,6 +208,6 @@ if node['platform'] == 'debian'
     group 'root'
     mode '0644'
   end
-  
-  
+
+
 end
