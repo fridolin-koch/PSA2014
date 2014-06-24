@@ -169,11 +169,23 @@ if node['platform'] == 'debian'
 
       #create user
       user user["name"] do
-        supports :manage_home => true
+        #supports :manage_home => true
         uid user["id"]
         gid 1005
         home "/home/#{user['name']}"
         shell "/bin/bash"
+      end
+      
+      if !user['mount'].nil? 
+
+        #mount share
+        mount "/home/#{user['name']}" do
+          device user['mount']
+          fstype "nfs"
+          options "rw"
+          action [:mount, :enable]
+        end
+        
       end
 
       if setPassword
@@ -266,6 +278,19 @@ if node['platform'] == 'debian'
   execute "Restart network" do
     command "ifdown eth1 && ifup eth1"
     action :run
+  end
+
+  #nfs config
+  cookbook_file "/etc/idmapd.conf" do
+   source "etc_idmapd.conf"
+   mode 0644
+   owner "root"
+   group "root"
+  end
+
+  #nfs restart
+  service "nfs-common" do
+    action :restart
   end
 
 end
