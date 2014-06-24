@@ -60,6 +60,14 @@ if !master
     action :create
   end
   
+  #mount backup dir
+  mount node['mysql']['backup_dir'] do
+    device "192.168.1.7:/fs/mysql"
+    fstype "nfs"
+    options "rw"
+    action [:mount, :enable]
+  end
+  
   #cron log direcotry
   directory '/var/log/cron' do
     owner "root"
