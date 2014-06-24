@@ -6,7 +6,7 @@
 # the following line prefixes the backups with the defined directory. it must not end with a /
 TARGET_PATH="<%= node['mysql']['backup_dir'] %>"
 
-# when running via cron, the PATHs MIGHT be different. If you have a custom/manual MYSQL install, you should set this manually like 
+# when running via cron, the PATHs MIGHT be different. If you have a custom/manual MYSQL install, you should set this manually like
 MYSQLDUMPPATH=$(which mysqldump)
 
 #mysqladmin path
@@ -19,7 +19,7 @@ DATESTAMP=$(date +".%m.%d.%Y")
 DAY=$(date +"%d")
 DAYOFWEEK=$(date +"%A")
 
-PERIOD=${1-day}
+PERIOD="auto"
 if [ ${PERIOD} = "auto" ]; then
 	if [ ${DAY} = "01" ]; then
         	PERIOD=month
@@ -27,7 +27,7 @@ if [ ${PERIOD} = "auto" ]; then
         	PERIOD=week
 	else
        		PERIOD=day
-	fi	
+	fi
 fi
 
 echo "Selected period: $PERIOD."
