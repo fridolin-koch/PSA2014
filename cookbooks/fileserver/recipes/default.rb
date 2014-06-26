@@ -18,7 +18,6 @@ package "samba" do
   action :install
 end
 
-
 #nfs config
 cookbook_file "/etc/exports" do
     source "etc_exports"
@@ -28,5 +27,19 @@ cookbook_file "/etc/exports" do
 end
 
 service "nfs-kernel-server" do
+    action :restart
+end
+
+#smb server config
+cookbook_file "/etc/samba/smb.conf" do
+    source "smb.conf"
+    mode 0644
+    owner "root"
+    group "root"
+end
+
+#smb users
+
+service "samba" do
     action :restart
 end
