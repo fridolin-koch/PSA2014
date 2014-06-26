@@ -27,64 +27,86 @@ if node['platform'] == 'debian'
     action :run
   end
 
-  #install utils
+  #install utils and usefull packages
+
   #git
   package "git" do
     action :install
   end
+
   #svn
   package "subversion" do
     action :install
   end
+
   #htop
   package "htop" do
     action :install
   end
-  #ruby
+
+  #ruby - always useful :)
   package "ruby" do
     action :install
   end
+
   #vim
   package "vim" do
     action :install
   end
+
   #curl
   package "curl" do
     action :install
   end
+
   #sudo
   package "sudo" do
     action :install
   end
+
   #telnet
   package "telnet" do
     action :install
   end
+
   #xterm
   package "xterm" do
     action :install
   end
+
   #screen
   package "screen" do
     action :install
   end
-  #ntp
+
+  #ntp client
   package "ntp" do
     action :install
   end
+
   #dig
   package "dnsutils" do
     action :install
   end
+
+  #network debug
   package "tcpdump" do
     action :install
   end
+
+  #lync text-based browser
   package "lynx" do
     action :install
   end
-  #nfs
+
+  #nfs client
   package "nfs-common" do
-      action :install
+    action :install
+  end
+
+  #smb client
+  package "cifs-utils" do
+    action :install
   end
 
   #ssh server banner
@@ -175,8 +197,8 @@ if node['platform'] == 'debian'
         home "/home/#{user['name']}"
         shell "/bin/bash"
       end
-      
-      if !user['mount'].nil? 
+
+      if !user['mount'].nil?
 
         #mount share
         mount "/home/#{user['name']}" do
@@ -185,7 +207,7 @@ if node['platform'] == 'debian'
           options "rw"
           action [:mount, :enable]
         end
-        
+
       end
 
       if setPassword
