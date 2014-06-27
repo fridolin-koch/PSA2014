@@ -3,5 +3,5 @@
 #
 #don't allow root in homes
 /fs/homes        192.168.0.0/255.255.0.0(rw,async,no_subtree_check,root_squash)
-/fs/mysql        192.168.1.6/255.255.255.255(rw,async,no_subtree_check,no_root_squash)
-/fs/webserver    192.168.1.2/255.255.255.255(rw,async,no_subtree_check,no_root_squash)
+/fs/mysql        192.168.1.6/255.255.255.255(rw,async,subtree_check,root_squash)
+/fs/webserver    192.168.1.2/255.255.255.255(rw,async,subtree_check,root_squash)

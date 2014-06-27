@@ -204,7 +204,7 @@ if node['platform'] == 'debian'
         mount "/home/#{user['name']}" do
           device user['mount']
           fstype "nfs"
-          options "rw"
+          options "rw,nosuid"
           action [:mount, :enable]
         end
 
