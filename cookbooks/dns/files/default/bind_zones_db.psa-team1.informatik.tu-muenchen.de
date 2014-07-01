@@ -35,3 +35,4 @@ www1                     IN CNAME   www
 piwik                    IN CNAME   www
 db                       IN CNAME   node5
 fs                       IN CNAME   node7
+ldap                     IN CNAME   node4
