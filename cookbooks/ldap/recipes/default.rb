@@ -12,3 +12,11 @@ end
 package "ldap-utils" do
   action :install
 end
+
+#ldap config
+
+ source "ldap.conf"
+ mode 0644
+ owner "root"
+ group "root"
+end
