@@ -15,8 +15,13 @@ end
 
 #ldap config
 
+cookbook_file "/etc/ldap/ldap.conf" do
  source "ldap.conf"
  mode 0644
  owner "root"
  group "root"
+end
+
+service "slapd" do
+  action :restart
 end

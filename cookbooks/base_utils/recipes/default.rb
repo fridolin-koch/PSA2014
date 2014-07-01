@@ -108,6 +108,20 @@ if node['platform'] == 'debian'
   package "cifs-utils" do
     action :install
   end
+  
+  #ldap client and pam
+  package "libpam-ldapd" do
+    action :install
+  end
+  
+  package "libnss-ldapd" do
+    action :install
+  end
+  
+  package "nslcd" do
+    action :install
+  end
+    
 
   #ssh server banner
   template "/etc/motd" do
@@ -186,17 +200,7 @@ if node['platform'] == 'debian'
 
     psateam["users"].each do |user|
 
-      #only set the password once
-      setPassword = !node["etc"]["passwd"].has_key?(user["name"])
-
-      #create user
-      user user["name"] do
-        #supports :manage_home => true
-        uid user["id"]
-        gid 1005
-        home "/home/#{user['name']}"
-        shell "/bin/bash"
-      end
+      #switched to ldap
 
       if !user['mount'].nil?
 
@@ -207,14 +211,12 @@ if node['platform'] == 'debian'
           options "rw,nosuid"
           action [:mount, :enable]
         end
-
-      end
-
-      if setPassword
-        #change password and force the user to change it
-        execute "Setting password for user #{user['name']}" do
-            command "echo #{user['name']}:psa2014 | chpasswd && chage -d 0 #{user['name']}"
-            action :run
+      else
+        directory "/home/#{user['name']}" do
+          owner user['name']
+          group "psateam"
+          mode 0755
+          action :create
         end
       end
 
