@@ -1,0 +1,19 @@
+server {
+
+  listen 8081 default_server;
+
+  root /var/www/ldapadm;
+  index index.php;
+
+  error_log /var/log/nginx/ldapadm-error.log;
+  access_log /var/log/nginx/ldapadm-access.log without_ip;
+
+  server_name ldapadm.psa-team1.informatik.tu-muenchen.de;
+
+
+  # Relay all index.php requests to fastcgi.
+  location ~* ^.+\.php$ {
+    include /etc/nginx/fastcgi_params;
+    fastcgi_pass unix:/var/run/php5fpm-www.sock;
+  }
+}

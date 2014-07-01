@@ -95,14 +95,14 @@ if node['platform'] == 'debian'
   mount "/var/www" do
     device "192.168.1.7:/fs/webserver"
     fstype "nfs"
-    options "rw"
+    options "rw,nosuid"
     action [:mount, :enable]
   end
 
   #create subdirecories for each domain
   count = 1
 
-  ["www", "www1", "www2", "piwik"].each do |host|
+  ["www", "www1", "www2", "piwik", "ldapadm"].each do |host|
 
     directory "/var/www/#{host}" do
       owner "www-data"
@@ -111,7 +111,7 @@ if node['platform'] == 'debian'
       action :create
     end
 
-    if host != 'piwik'
+    if host != 'piwik' && host != 'ldapadm'
 
       #create some index document
       template "/var/www/#{host}/index.html" do
