@@ -1,0 +1,35 @@
+# The search scope.
+#scope sub
+
+#
+# libnss-ldap.conf generated for <%= node['hostname'] %>
+#
+# Managed by Chef
+#
+# The user and group nslcd should run as.
+uid nslcd
+gid nslcd
+
+# The location at which the LDAP server(s) should be reachable.
+#uri ldap://192.168.1.4/
+uri ldap://ldap.psa-team1.informatik.tu-muenchen.de
+# The search base that will be used for all queries.
+base <%= @basedn %>
+
+# The LDAP protocol version to use.
+ldap_version 3
+
+# The DN to bind with for normal lookups.
+binddn cn=admin,<%= @basedn %>
+bindpw sidolin
+
+# The DN used for password modifications by root.
+#rootpwmoddn cn=admin,dc=example,dc=com
+
+# SSL options
+ssl start_tls
+tls_reqcert demand
+tls_cacertfile /etc/ldap/ldapCert.pem
+# The search scope.
+#scope sub
+

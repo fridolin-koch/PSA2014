@@ -10,6 +10,9 @@
         "address": "192.168.1.7",
         "gateway": "192.168.1.1"
       }
+    },
+    "nfs": {
+      "mount-home": false
     }
   },
   "run_list": [

@@ -108,20 +108,20 @@ if node['platform'] == 'debian'
   package "cifs-utils" do
     action :install
   end
-  
-  #ldap client and pam
-  package "libpam-ldapd" do
+
+  package "gnutls-bin" do
     action :install
   end
-  
-  package "libnss-ldapd" do
-    action :install
+
+  #mount home direcotry
+  if node['nfs']['mount-home']
+    mount "/home" do
+      device "192.168.1.7:/fs/home"
+      fstype "nfs"
+      options "rw,nosuid"
+      action [:mount, :enable]
+    end
   end
-  
-  package "nslcd" do
-    action :install
-  end
-    
 
   #ssh server banner
   template "/etc/motd" do
@@ -193,35 +193,7 @@ if node['platform'] == 'debian'
     action :create
   end
 
-  #get psa team members
-  psateam = data_bag_item('users', 'psateam')
 
-  if psateam["users"]
-
-    psateam["users"].each do |user|
-
-      #switched to ldap
-
-      if !user['mount'].nil?
-
-        #mount share
-        mount "/home/#{user['name']}" do
-          device user['mount']
-          fstype "nfs"
-          options "rw,nosuid"
-          action [:mount, :enable]
-        end
-      else
-        directory "/home/#{user['name']}" do
-          owner user['name']
-          group "psateam"
-          mode 0755
-          action :create
-        end
-      end
-
-    end
-  end
 
   #-----------
   # Networking
@@ -271,7 +243,6 @@ if node['platform'] == 'debian'
      owner "root"
      group "root"
     end
-
 
   end
 
