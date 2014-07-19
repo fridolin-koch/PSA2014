@@ -13,6 +13,8 @@
 -A PREROUTING -p tcp --dport 60182 -j DNAT --to-destination 192.168.1.2:8080
 #ldapadm
 -A PREROUTING -p tcp --dport 60184 -j DNAT --to-destination 192.168.1.2:8081
+#openvas
+-A PREROUTING -p tcp --dport 60185 -j DNAT --to-destination 192.168.1.2:9392
 
 -A POSTROUTING -o eth0 -j MASQUERADE
 
