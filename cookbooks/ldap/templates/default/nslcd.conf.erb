@@ -19,12 +19,12 @@ base <%= @basedn %>
 # The LDAP protocol version to use.
 ldap_version 3
 
-# The DN to bind with for normal lookups.
 binddn cn=admin,<%= @basedn %>
 bindpw sidolin
 
 # The DN used for password modifications by root.
-#rootpwmoddn cn=admin,dc=example,dc=com
+rootpwmoddn cn=admin,<%= @basedn %>
+rootpwmodpw sidolin
 
 # SSL options
 ssl start_tls

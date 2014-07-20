@@ -10,34 +10,21 @@ package "libpam-ldap" do
   action :purge
 end
 
-package "libnss-ldap" do
-  action :purge
+package "libnss-ldapd" do
+  action :install
 end
 
-package "nslc" do
-  action :purge
+package "ldap-utils" do
+  action :install
 end
 
 package "libpam-ldapd" do
   action :install
 end
 
-
-
 #load data bag
 ldap_secret = Chef::EncryptedDataBagItem.load_secret("/etc/chef/psa_databag_secret")
 ldap_creds  = Chef::EncryptedDataBagItem.load("passwords", "ldap", ldap_secret)
-
-#other ldap config
-template "/etc/ldap.conf" do
-  source "ldap.conf.erb"
-  mode 00644
-  owner "root"
-  group "root"
-  variables({
-    :basedn => "dc=team01,dc=psa,dc=rbg,dc=tum,dc=de",
-  })
-end
 
 cookbook_file "/etc/ldap/ldapCert.pem" do
   source "ldapCert.pem"
@@ -68,7 +55,7 @@ end
 
 template "/etc/nslcd.conf" do
   source "nslcd.conf.erb"
-  mode 00644
+  mode 00600
   owner "root"
   group "root"
   variables({
