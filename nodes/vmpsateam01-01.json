@@ -18,10 +18,11 @@
       },
       "gateway": true
     }
-    
+
   },
   "run_list": [
     "recipe[base_utils]",
+    "recipe[ldap::client]",
     "recipe[dhcp]"
   ]
 }

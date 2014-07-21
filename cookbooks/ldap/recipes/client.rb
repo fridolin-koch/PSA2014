@@ -4,12 +4,6 @@
 #
 # Copyright 2014, Fridolin Koch, Matthias Lang
 #
-
-#ldap client and pam
-package "libpam-ldap" do
-  action :purge
-end
-
 package "libnss-ldapd" do
   action :install
 end
@@ -44,8 +38,6 @@ template "/etc/ldap/ldap.conf" do
 end
 
 #nslcd
-
-
 cookbook_file "/etc/nsswitch.conf" do
   source "nsswitch.conf"
   mode 00644
@@ -61,6 +53,11 @@ template "/etc/nslcd.conf" do
   variables({
     :basedn => "dc=team01,dc=psa,dc=rbg,dc=tum,dc=de",
   })
+end
+
+#restart nslcd
+service "nslcd" do
+  action :restart
 end
 
 #pam

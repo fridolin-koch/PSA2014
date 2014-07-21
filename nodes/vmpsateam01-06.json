@@ -19,6 +19,7 @@
   },
   "run_list": [
     "recipe[base_utils]",
-    "recipe[database]"
+    "recipe[database]",
+    "recipe[ldap::client]"
   ]
 }

@@ -15,6 +15,7 @@
   "run_list": [
     "recipe[base_utils]",
     "recipe[dns]",
-    "recipe[ldap::server]"
+    "recipe[ldap::server]",
+    "recipe[ldap::client]"
   ]
 }
