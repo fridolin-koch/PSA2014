@@ -4,8 +4,8 @@ TUM PSA SS2014 - Team 01
 
 Authors
 -------
-Fridolin Koch
-Mattias Lang
+* Fridolin Koch
+* Mattias Lang
 
 License
 --------
