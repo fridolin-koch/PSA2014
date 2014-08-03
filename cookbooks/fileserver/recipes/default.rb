@@ -2,9 +2,10 @@
 # Cookbook Name:: fileserver
 # Recipe:: default
 #
-# Copyright 2014, Fridolin Koch, Matthias Lang
+# (c) 2014 Fridolin Koch & Mattias Lang
 #
-# All rights reserved - Do Not Redistribute
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
 #
 
 

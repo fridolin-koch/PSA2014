@@ -2,7 +2,10 @@
 # Cookbook Name:: ldap
 # Recipe:: server
 #
-# Copyright 2014, Fridolin Koch, Matthias Lang
+# (c) 2014 Fridolin Koch & Mattias Lang
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
 #
 
 #install ldap
@@ -58,4 +61,3 @@ end
 service "slapd" do
   action :start
 end
-

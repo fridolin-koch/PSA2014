@@ -2,9 +2,11 @@
 # Cookbook Name:: base_utils
 # Recipe:: default
 #
-# Copyright 2014, Fridolin Koch
+# (c) 2014 Fridolin Koch & Mattias Lang
 #
-# MIT
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
 
 #we only support debian at this time
 if node['platform'] == 'debian'

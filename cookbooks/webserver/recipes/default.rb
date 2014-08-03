@@ -2,7 +2,10 @@
 # Cookbook Name:: webserver
 # Recipe:: default
 #
-# Copyright 2014, Fridolin Koch, Matthias Lang
+# (c) 2014 Fridolin Koch & Mattias Lang
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
 #
 
 #we only support debian at this time
