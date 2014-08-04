@@ -56,11 +56,8 @@ COMMIT
 
 #aptitude servers
 #security.debian.org
-#-A OUTPUT -d 212.211.132.250 -j ACCEPT
-#-A OUTPUT -d 195.20.242.89 -j ACCEPT
-#-A OUTPUT -d 212.211.132.32 -j ACCEPT
 #it's a cdn so we use the hostname
-#-A OUTPUT -p tcp --dest cdn.debian.net -j ACCEPT
+-A OUTPUT -p tcp --dest cdn.debian.net -j ACCEPT
 #dotdeb archives
 -A OUTPUT -d 88.190.17.153 -j ACCEPT
 

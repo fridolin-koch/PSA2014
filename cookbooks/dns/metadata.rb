@@ -3,5 +3,5 @@ maintainer       'Fridolin Koch, Matthias Lang'
 maintainer_email 'kochfr@in.tum.de, langm@in.tum.de'
 license          'MIT'
 description      'Installs/Configures dns'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+long_description 'N/A'
 version          '1.0.0'

@@ -8,7 +8,7 @@ server {
   access_log /var/log/nginx/piwik-access.log without_ip;
 
   server_name piwik.psa-team1.informatik.tu-muenchen.de;
-  
+
 
   # Relay all index.php requests to fastcgi.
   location ~* ^/(?:index|piwik)\.php$ {
@@ -18,14 +18,14 @@ server {
 
   # Any other attempt to access PHP files returns a 404.
   location ~* ^.+\.php$ {
-    return 404; 
+    return 404;
   }
 
 }
 
 
 server {
-  
+
   listen 8080 default_server;
 
   root /var/www/piwik;
@@ -35,7 +35,7 @@ server {
   access_log /var/log/nginx/piwik-access.log without_ip;
 
   server_name piwik.psa-team1.informatik.tu-muenchen.de;
-  
+
 
   # Relay all index.php requests to fastcgi.
   location ~* ^/(?:index|piwik)\.php$ {
@@ -45,7 +45,7 @@ server {
 
   # Any other attempt to access PHP files returns a 404.
   location ~* ^.+\.php$ {
-    return 404; 
+    return 404;
   }
 
 }
