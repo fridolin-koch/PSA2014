@@ -1,0 +1,3 @@
+<% @users.each do |user| %>
+<%= user['name'] %> -fstype=nfs,rw,nosuid,nodev,hard,intr <%= user['mount'] %>
+<% end %>

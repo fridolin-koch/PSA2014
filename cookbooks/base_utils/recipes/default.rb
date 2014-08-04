@@ -126,6 +126,42 @@ if node['platform'] == 'debian'
     end
   end
 
+  #automount
+  package "autofs5" do
+    action :install
+  end
+
+  #load data bag
+  psateam = data_bag_item('users', 'psateam')
+
+  template "/etc/default/autofs" do
+    source "default_autofs.erb"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+
+  template "/etc/auto.home" do
+    source "auto.home.erb"
+    mode 0644
+    owner "root"
+    group "root"
+    variables({
+      :users => psateam["users"]
+    })
+  end
+
+  cookbook_file "/etc/auto.master" do
+    source "auto.master"
+    mode 0644
+    owner "root"
+    group "root"
+  end
+
+  service "autofs" do
+    action :restart
+  end
+
   #ssh server banner
   template "/etc/motd" do
     source "sshd_banner.erb"
