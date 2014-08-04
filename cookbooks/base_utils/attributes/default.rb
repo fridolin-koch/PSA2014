@@ -18,6 +18,7 @@ default['networking']['gateway'] = false
 
 default['networking']['eth1:0']['address'] = nil
 default['networking']['eth1:0']['netmask'] = '255.255.255.0'
+default['networking']['eth1:0']['gateway'] = '192.168.1.1'
 
 default['networking']['eth1:1']['address'] = nil
 default['networking']['eth1:1']['netmask'] = '255.255.255.0'
