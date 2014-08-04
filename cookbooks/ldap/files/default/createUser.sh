@@ -7,7 +7,7 @@ PORT="389"
 ROOTDN="cn=root"
 PASSWD="psa2014"
 LDIF="/tmp/createuser.ldif"
-i="1100"
+i="2000"
 [ ! -f $INPUT ] &while read Name Vorname Geschlecht Geburtsdatum Geburtsort Nat Strasse PLZ Ort Telefon Matrikelnummer
 do
 	((i++))
@@ -23,6 +23,6 @@ do
         echo "objectClass: posixAccount" >> $LDIF
 
         echo "/usr/bin/ldapmodify -x -p $PORT -D "$ROOTDN" -w $PASSWD -a -f $LDIF"
-	
+
 done < $INPUT
 IFS=$OLDIFS

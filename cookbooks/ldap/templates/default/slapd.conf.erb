@@ -113,10 +113,13 @@ access to attrs=userPassword,shadowLastChange
 # happily.
 access to dn.base="" by * read
 
+
 # The admin dn has full write access, everyone else
 # can read everything.
 access to *
         by group.exact="cn=administrators,<%= @basedn %>" write
         by dn="cn=syncrole,<%= @basedn %>" read
-        by * read
-        
+        by users read
+
+access to *
+        by dn.exact="cn=readUser,<%= @basedn %>" read

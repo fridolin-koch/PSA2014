@@ -37,6 +37,7 @@ template "/etc/ldap/ldap.conf" do
   group "root"
   variables({
     :basedn => "dc=team01,dc=psa,dc=rbg,dc=tum,dc=de",
+    :password => ldap_creds['readUser']
   })
 end
 
@@ -55,6 +56,7 @@ template "/etc/nslcd.conf" do
   group "root"
   variables({
     :basedn => "dc=team01,dc=psa,dc=rbg,dc=tum,dc=de",
+    :password => ldap_creds['readUser']
   })
 end
 
@@ -72,4 +74,10 @@ end
     group "root"
     notifies :restart, "service[ssh]", :delayed
   end
+end
+
+
+
+package "autofs5-ldap" do
+  action :purge
 end

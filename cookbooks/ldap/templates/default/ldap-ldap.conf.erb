@@ -12,6 +12,7 @@
 
 BASE <%= @basedn %>
 URI ldap://ldap.psa-team1.informatik.tu-muenchen.de
+BINDDN readUser,<%= @basedn %>
 
 TLS_REQCERT demand
 TLS_CACERT /etc/ldap/ldapCert.pem

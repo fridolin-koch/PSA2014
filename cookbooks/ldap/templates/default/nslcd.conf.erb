@@ -19,8 +19,8 @@ base <%= @basedn %>
 # The LDAP protocol version to use.
 ldap_version 3
 
-binddn cn=admin,<%= @basedn %>
-bindpw sidolin
+binddn cn=readUser,<%= @basedn %>
+bindpw <%= @password %>
 
 # The DN used for password modifications by root.
 rootpwmoddn cn=admin,<%= @basedn %>
@@ -32,4 +32,3 @@ tls_reqcert demand
 tls_cacertfile /etc/ldap/ldapCert.pem
 # The search scope.
 #scope sub
-

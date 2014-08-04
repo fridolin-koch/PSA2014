@@ -33,6 +33,17 @@ directory "/etc/ldap/slapd.d" do
   action :create
 end
 
+#delete contents in /etc/ldap/slapd.d
+execute "slapd-config-delete" do
+  command "rm -Rf /etc/ldap/slapd.d/*"
+  notifies :run, "execute[slapd-config-convert]"
+  action :nothing
+end
+
+service "slapd" do
+  action :nothing
+end
+
 execute "slapd-config-convert" do
   command "slaptest -f /etc/ldap/slapd.conf -F /etc/ldap/slapd.d/"
   user "openldap"
@@ -50,14 +61,10 @@ template "/etc/ldap/slapd.conf" do
   owner "openldap"
   group "openldap"
   notifies :stop, "service[slapd]", :immediately
-  notifies :run, "execute[slapd-config-convert]"
+  notifies :run, "execute[slapd-config-delete]"
   variables({
     :basedn => "dc=team01,dc=psa,dc=rbg,dc=tum,dc=de",
     :rootdn => ldap_creds['rootdn'],
     :rootpw => ldap_creds['rootpw']
   })
-end
-
-service "slapd" do
-  action :start
 end
