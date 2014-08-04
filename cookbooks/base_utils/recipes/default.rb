@@ -118,9 +118,10 @@ if node['platform'] == 'debian'
   #mount home direcotry
   if node['nfs']['mount-home']
     mount "/home" do
-      device "192.168.1.7:/fs/home"
+      device "192.168.1.7:/fs/homes"
       fstype "nfs"
       options "rw,nosuid"
+      pass 0
       action [:mount, :enable]
     end
   end

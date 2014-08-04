@@ -94,11 +94,30 @@ if node['platform'] == 'debian'
     action :create
   end
 
-  #mount
+  #mount docroot
   mount "/var/www" do
     device "192.168.1.7:/fs/webserver"
     fstype "nfs"
     options "rw,nosuid"
+    pass 0
+    action [:mount, :enable]
+  end
+
+  #mount openvas cache
+  mount "/var/cache/openvas" do
+    device "192.168.1.7:/fs/openvas/cache"
+    fstype "nfs"
+    options "rw,nosuid"
+    pass 0
+    action [:mount, :enable]
+  end
+
+  #mount openvas lib
+  mount "/var/lib/openvas" do
+    device "192.168.1.7:/fs/openvas/lib"
+    fstype "nfs"
+    options "rw,nosuid"
+    pass 0
     action [:mount, :enable]
   end
 
