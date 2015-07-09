@@ -62,6 +62,3 @@ Just include `base_utils` in your node's `run_list`:
 }
 ```
 
-License and Authors
--------------------
-&copy; Fridolin Koch - Airmotion GmbH News and Entertainment 2013
